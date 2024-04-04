@@ -11,6 +11,9 @@ class Segment:
     def get_ai_prediction(self):
         return self.ai_prediction
 
+    def get_human_prediction(self):
+        return self.human_prediction
+
     def predict_ai(self, prediction):
         self.ai_prediction = prediction
 

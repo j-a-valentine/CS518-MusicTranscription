@@ -11,6 +11,9 @@ class GUI:
     def run(self):
         self.root.mainloop()
 
+    def stop(self):
+        self.root.destroy()
+
     def load_window(self, ai_prediction, submit_callback, audio_callback):
         for widget in self.root.winfo_children():
             widget.destroy()
