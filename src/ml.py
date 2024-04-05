@@ -10,7 +10,7 @@ class AITranscriber:
 
     def transcribe(self, mp3):
         audio_file = open(mp3, "rb")
-        response = self.client.audio.transcriptions.create(model="whisper-1", file=audio_file, response_format="verbose_json", timestamp_granularities=["segment"], language="en", prompt="set the timestamps to be very precise")
+        response = self.client.audio.transcriptions.create(model="whisper-1", file=audio_file, response_format="verbose_json", timestamp_granularities=["segment"])
         audio_file.close()
         print(response)
         audio = AudioSegment.from_mp3(mp3)
