@@ -1,9 +1,9 @@
 class Segment:
-    def __init__(self, lyrics, mp3):
-        self.lyrics = lyrics
+    def __init__(self, ai_prediction, mp3):
         self.mp3 = mp3
-        self.ai_prediction = ""
+        self.ai_prediction = ai_prediction
         self.humman_prediction = ""
+        self.lyrics = ""
 
     def get_mp3(self):
         return self.mp3 
@@ -13,9 +13,6 @@ class Segment:
 
     def get_human_prediction(self):
         return self.human_prediction
-
-    def predict_ai(self, prediction):
-        self.ai_prediction = prediction
 
     def predict_human(self, prediction):
         self.human_prediction = prediction
