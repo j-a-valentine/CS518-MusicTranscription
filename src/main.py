@@ -1,5 +1,4 @@
 import os
-from segment import Segment
 from song_controller import SongController
 from ml import AITranscriber
 from dotenv import dotenv_values
