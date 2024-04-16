@@ -18,13 +18,13 @@ class SongController:
         self.stop_audio()
         self.segment_index += 1
         if self.segment_index < len(self.segments):
-            ai_prediction = self.segments[self.segment_index].get_ai_prediction()
-            self.gui.load_window(ai_prediction, self.submit_human_prediction, self.play_audio)
+            prediction = self.segments[self.segment_index].get_prediction()
+            self.gui.load_window(prediction, self.submit_transcription, self.play_audio)
         else:
             self.gui.stop()
 
-    def submit_human_prediction(self, prediction):
-        self.segments[self.segment_index].predict_human(prediction)
+    def submit_transcription(self, prediction):
+        self.segments[self.segment_index].set_transcription(prediction)
         self.next_segment()
     
     def play_audio(self):

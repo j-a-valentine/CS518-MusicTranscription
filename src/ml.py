@@ -1,3 +1,5 @@
+import os
+import string
 from openai import OpenAI
 from pydub import AudioSegment
 import tempfile
@@ -7,21 +9,6 @@ class AITranscriber:
 
     def __init__(self, api_key):
         self.client = OpenAI(api_key=api_key)
-
-    def transcribe_simple(self, mp3):
-        audio_file = open(mp3, "rb")
-        response = self.client.audio.transcriptions.create(model="whisper-1", file=audio_file, response_format="verbose_json", timestamp_granularities=["segment"])
-        audio_file.close()
-        audio = AudioSegment.from_mp3(mp3)
-        segments = []
-        for seg in response.segments:
-            segment_audio = audio[round(float(seg["start"]) * 1000) : round(float(seg["end"]) * 1000)]
-            temp_file = tempfile.NamedTemporaryFile(suffix='.mp3', dir="./temp", delete=False)
-            temp_file_path = temp_file.name
-            segment_audio.export(temp_file_path, format='mp3')
-            temp_file.close()
-            segments.append(Segment(seg["text"], temp_file_path))
-        return segments
 
     def debug(self, response):
         word_count = []
@@ -39,7 +26,7 @@ class AITranscriber:
 
     def transcribe_complex(self, mp3):
         audio_file = open(mp3, "rb")
-        response = self.client.audio.transcriptions.create(model="whisper-1", file=audio_file, response_format="verbose_json", timestamp_granularities=["segment", "word"])
+        response = self.client.audio.transcriptions.create(model="whisper-1", language="en", file=audio_file, response_format="verbose_json", timestamp_granularities=["segment", "word"])
         audio_file.close()
         audio = AudioSegment.from_mp3(mp3)
         current_word_index = 0
@@ -54,11 +41,13 @@ class AITranscriber:
             end = response_words[current_word_index-1]["end"]
             segment_audio = audio[round(float(start) * 1000) : round(float(end) * 1000)]
             temp_file = tempfile.NamedTemporaryFile(suffix='.mp3', dir="./temp", delete=False)
-            temp_file_path = temp_file.name
+            temp_file_path = f"./{os.path.relpath(temp_file.name)}"
             segment_audio.export(temp_file_path, format='mp3')
             temp_file.close()
-            segments.append(Segment(words, temp_file_path))
+            segments.append(Segment((" ".join(words)), temp_file_path))
         return segments
+
+    
 
 
 
