@@ -36,7 +36,7 @@ To run the program smoothly, follow these simple steps:
 
 1. **Create a `.env` file**: Create a file named `.env` in the root directory of the project. Add the following line to the `.env` file:
 ```OPENAI_API_KEY=YOUR_OPENAI_API_KEY```
-Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key. If you don't have one, sign up for an account on the [OpenAI website](https://openai.com/) to obtain your API key.
+Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key.
 
 2. **Create a folder titled `audio`**: In the root directory of the project, create a folder named `audio`.
 
