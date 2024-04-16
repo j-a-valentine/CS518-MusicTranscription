@@ -48,6 +48,7 @@ Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key.
       python main.py "SONG_TITLE"
       ```
       Replace `"SONG_TITLE"` with the title of the song you want to process, without the `.mp3` extension.
+      
     - Optionally, you can specify the `pipeline` parameter to run the program in pipeline mode:
       ```
       python main.py "SONG_TITLE" pipeline
