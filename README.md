@@ -28,6 +28,7 @@ source venv/bin/activate
 
 Once your virtual environment is activated, you can install the required Python packages using pip:
 pip install -r requirements.txt
+```
 
 ### Setting Up and Running the Program
 
