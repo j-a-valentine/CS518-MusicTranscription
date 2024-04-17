@@ -5,16 +5,20 @@ from song_controller import SongController
 from ml import AITranscriber
 from dotenv import dotenv_values
 from segment import Segment
+
 os.environ['TK_SILENCE_DEPRECATION'] = '1'
 
 def main():
     if len(sys.argv) < 2:
         print("Usage: python your_script.py <song_name>")
         return
-    for directory in ['./audio', './data', './temp']:
+    for directory in ['./audio', './data', './temp', './output']:
         if not os.path.exists(directory):
             os.makedirs(directory)
     song = sys.argv[1]
+    if not os.path.exists(f"./audio/{song}.mp3"):
+        print(f"{song}.mp3 could not be found in ./audio")
+        return
     if len(sys.argv) > 2 and sys.argv[2] == "pipeline":
         method = 1
     else:
@@ -30,7 +34,6 @@ def main():
             segments = []
             for json_segment in json_data[len(json_data)-1]:
                 segments.append(Segment(json_segment["transcription"], json_segment["mp3"]))
-        
     else:
         json_data = []
         t = AITranscriber(dotenv_values()["OPENAI_API_KEY"])
@@ -41,17 +44,6 @@ def main():
     with open(f"./data/{song}.json", "w") as json_file:
         json_data.append(json_segments)
         json.dump(json_data, json_file, indent=4)
-
-
-    
-   
-
-
-
-    print("done")
-
-
-
 
 if __name__ == "__main__":
     main()
