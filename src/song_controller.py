@@ -7,7 +7,7 @@ class SongController:
     def __init__(self, segments):
         self.segments = segments
         self.segment_index = -1
-        self.gui = GUI()
+        self.gui = GUI(len(segments))
         pygame.mixer.init()
 
     def run_song(self):
