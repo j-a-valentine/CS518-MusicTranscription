@@ -2,11 +2,13 @@ import tkinter as tk
 from tkinter import ttk
 
 class GUI:
-    def __init__(self):
+    def __init__(self, num_segments):
         self.root = tk.Tk()
         self.root.geometry("1000x400")
         self.root.option_add("*Font", ("Arial", 16))
         self.root.title("Music Transcription Tool")
+        self.num_segments = num_segments
+        self.progress = 0
 
     def run(self):
         self.root.mainloop()
@@ -23,6 +25,12 @@ class GUI:
         self.root.grid_columnconfigure(0, weight=1)
         ai_label = ttk.Label(frame, text="Predicted Lyrics", font=('Arial', 20, 'bold'))
         ai_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+
+        progressbar = ttk.Progressbar(orient=tk.HORIZONTAL, length=(self.num_segments * 10))
+        progressbar.place(x=810, y=40)
+        self.progress += 10
+        progressbar['value'] = self.progress
+
         ai_text = ttk.Label(frame, text=prediction, wraplength=950, justify='left', font=('Arial', 16), foreground='#333333')
         ai_text.grid(row=1, column=0, padx=10, pady=10, sticky="w")
         input_label = ttk.Label(frame, text="Enter the lyrics you hear:", font=('Arial', 20, 'bold'))

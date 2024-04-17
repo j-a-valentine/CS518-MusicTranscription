@@ -38,6 +38,7 @@ def main():
         json_data = []
         t = AITranscriber(dotenv_values()["OPENAI_API_KEY"])
         segments = t.transcribe_complex(f"./audio/{song}.mp3")
+    print("Num segments: ", len(segments))
     controller = SongController(segments)
     controller.run_song()
     json_segments = [segment.serialize() for segment in segments]
