@@ -26,8 +26,8 @@ class GUI:
         ai_label = ttk.Label(frame, text="Predicted Lyrics", font=('Arial', 20, 'bold'))
         ai_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
 
-        progressbar = ttk.Progressbar(orient=tk.HORIZONTAL, length=(self.num_segments * 10))
-        progressbar.place(x=810, y=40)
+        progressbar = ttk.Progressbar(orient=tk.HORIZONTAL, maximum=(self.num_segments * 10))
+        progressbar.place(x=800, y=40)
         self.progress += 10
         progressbar['value'] = self.progress
 
